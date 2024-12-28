@@ -1,5 +1,7 @@
 # CMS
 
+Check [this](#asm-masters-configuration) before deploying cms through ansible.
+
 This playbook deploys [ioi/cms](https://github.com/ioi/cms).
 
 ## Service <-> Instance Mapping
@@ -97,7 +99,7 @@ ansible-playbook -i env/hosts.ini -e @env/vars.yml -e contest_id=<ID> cms/add_pa
        ansible-playbook -i env/hosts.ini -e @env/vars.yml cms/add_statements.yml 
 
 ## Configuring ranking web service assets
-
+   
 - Upload logo to `/var/local/lib/cms/ranking/logo.png`.
 - Upload user faces to `/var/local/lib/cms/ranking/faces/`.
 
@@ -120,3 +122,12 @@ sudo journalctl -u cms-log -f
 (If somehow it does not output anything -- try restarting journald via `sudo service systemd-journald restart`.)
 
 Or, to view latest per-service CMS logs, open `/var/local/log/cms/<service_name>-<shard>/last.log`.
+
+## ASM Masters Configuration
+- First of make sure to set all values in `env/vars.yml` marked with **TODO**.
+- For our minial setup it is only required to set ip address of the following in the `env/hosts.ini`.
+   - `cms_db`
+   - `nginx_contest`
+   - `nginx_public`
+   - `cms`
+   - `cms_worker`
